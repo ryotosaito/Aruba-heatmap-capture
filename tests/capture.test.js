@@ -14,6 +14,7 @@ const mapPage = `<!doctype html>
   #vrf_background_control { width: 180px; height: 100px; background: green }
   .vrf_sidebar:not(.dismiss) + .vrf_mapwidget #vrf_background_control { width: 240px }
   .vrf_mapwidget.loading_background #vrf_background_control { height: 160px }
+  .vrf_zoombar + #vrf_background_control { width: 210px }
 </style>
 <header>Outside the map</header>
 <main class="vrf_page loading">
@@ -24,6 +25,9 @@ const mapPage = `<!doctype html>
   setTimeout(() => {
     const sidebar = document.querySelector('.vrf_sidebar');
     sidebar.replaceWith(sidebar.cloneNode(false));
+    const zoomBar = document.createElement('div');
+    zoomBar.className = 'vrf_zoombar';
+    document.querySelector('#vrf_background_control').before(zoomBar);
     document.querySelector('.vrf_mapwidget').classList.remove('loading_background');
   }, 500);
 </script>`;
@@ -95,7 +99,7 @@ async function runCapture(t, { failAnnex = false } = {}) {
 	return { directory, requestedFloors, status, stderr };
 }
 
-test('waits for the map widget, dismisses the sidebar, and crops each indexed PNG', { timeout: 30000 }, async t => {
+test('waits for the map, dismisses the sidebar, removes the zoom bar, and crops each PNG', { timeout: 30000 }, async t => {
 	const { directory, requestedFloors, status, stderr } = await runCapture(t);
 	assert.equal(status, 0, stderr);
 	assert.deepEqual(requestedFloors, ['ground', 'first', 'annex']);

@@ -162,6 +162,7 @@ async function captureFloors(browser, buildings, index) {
 			console.error("saving screenshot...");
 			fs.mkdirSync(directory, { recursive: true });
 			const screenshotPath = path.join(directory, filename);
+			await page.$$eval('.vrf_zoombar', bars => bars.forEach(bar => bar.remove()));
 			await map.screenshot({ path: screenshotPath });
 			recordCapture(index, floor, filename);
 			console.error(`screenshot saved! (${screenshotPath})`);
