@@ -4,14 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "capture": "node capture.js"
+    "capture": "node capture.js",
+    "test": "node --test"
   },
   "author": "",
   "license": "ISC",
+  "puppeteer": {
+    "chrome": {
+      "skipDownload": true
+    },
+    "chrome-headless-shell": {
+      "skipDownload": false
+    }
+  },
   "dependencies": {
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
-    "puppeteer": "^1.19.0",
+    "fs-native-extensions": "1.5.5",
+    "puppeteer": "24.43.1",
     "unirest": "^0.6.0",
     "xml-js": "^1.6.11"
   }
