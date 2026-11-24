@@ -57,5 +57,10 @@ typings/
 # dotenv environment variables file
 .env
 
+# Capture index and temporary files
+/captures.json
+/captures.json.tmp
+/captures.json.lock
+
 # next.js build output
 .next
